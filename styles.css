@@ -576,6 +576,81 @@ ul { list-style: none; }
 
 
 /* ============================================
+   About / Why Us
+   ============================================ */
+
+.about {
+  padding: 120px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.about__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about__content {
+  position: sticky;
+  top: 120px;
+}
+
+.about__text {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  margin-top: 20px;
+}
+
+.about__values {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.value {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: all var(--transition);
+}
+
+.value:hover {
+  background: var(--bg-card);
+  border-color: var(--border);
+}
+
+.value__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(129, 140, 248, 0.08);
+  border: 1px solid rgba(129, 140, 248, 0.12);
+  border-radius: 12px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.value__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.value__desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ============================================
    Process / How it Works
    ============================================ */
 
@@ -855,6 +930,16 @@ ul { list-style: none; }
     grid-template-columns: 1fr;
     max-width: 500px;
     margin: 0 auto;
+  }
+
+  .about__wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about__content {
+    position: static;
+    text-align: center;
   }
 
   .book__wrapper {
