@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
 
+  // Also observe section headers and book wrapper for animations
+  document.querySelectorAll('.section-header, .book__wrapper').forEach((el) => {
+    el.classList.add('fade-up');
+    observer.observe(el);
+  });
+
   // --- Navbar scroll effect ---
   const nav = document.getElementById('nav');
   let lastScroll = 0;
