@@ -1,14 +1,8 @@
 // ============================================
-// flowsent.ai — Interactions & Animations
+// flowsent.ai — Interactions
 // ============================================
 
-// Set your form endpoint here (e.g. Formspree/Web3Forms/your own API:
-// 'https://formspree.io/f/yourFormId'). Until one is set, submissions fall
-// back to opening a prefilled email to hello@flowsent.ai so no lead is lost.
-const FORM_ENDPOINT = '';
-
 document.addEventListener('DOMContentLoaded', () => {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // --- Scroll-triggered fade-in animations ---
   const observer = new IntersectionObserver((entries) => {
@@ -20,15 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.section-header, .book__wrapper').forEach((el) => {
-    el.classList.add('fade-up');
-  });
   document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
 
   // --- Navbar scroll effect ---
   const nav = document.getElementById('nav');
   const onScroll = () => {
-    nav.classList.toggle('nav--scrolled', window.scrollY > 50);
+    nav.classList.toggle('nav--scrolled', window.scrollY > 40);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -59,23 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Smooth scroll for anchor links ---
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-      const id = anchor.getAttribute('href').slice(1);
-      if (!id) return;
-      const target = document.getElementById(id);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({
-          behavior: prefersReducedMotion ? 'auto' : 'smooth',
-          block: 'start'
-        });
-      }
-    });
+  // Reset menu state when the viewport grows past the mobile breakpoint
+  window.matchMedia('(min-width: 769px)').addEventListener('change', (m) => {
+    if (m.matches) setMenu(false);
   });
 
-  // --- Form submission ---
+  // In-page anchor scrolling is native: CSS scroll-behavior handles smoothness
+  // (with a prefers-reduced-motion override) and fragment navigation moves
+  // keyboard focus correctly — no JS needed.
+
+  // --- Form submission (Netlify Forms) ---
+  // The form posts to Netlify's built-in form handling on this same origin.
+  // Submissions appear in the Netlify dashboard under Forms → strategy-call.
   const form = document.getElementById('bookForm');
   const status = document.getElementById('formStatus');
   const submitBtn = form.querySelector('button[type="submit"]');
@@ -87,36 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(form));
-
-    if (!FORM_ENDPOINT) {
-      // No endpoint configured — hand the lead off via a prefilled email draft.
-      const body = [
-        'Name: ' + data.name,
-        'Email: ' + data.email,
-        'Company: ' + (data.company || '—'),
-        'Interested in: ' + data.service,
-        '',
-        data.message || ''
-      ].join('\n');
-      window.location.href = 'mailto:hello@flowsent.ai'
-        + '?subject=' + encodeURIComponent('Strategy call request — ' + data.name)
-        + '&body=' + encodeURIComponent(body);
-      showStatus("Opening your email app — send the draft and we'll be in touch.", 'success');
-      return;
-    }
-
     submitBtn.disabled = true;
     showStatus('Sending…', 'success');
 
     try {
-      const res = await fetch(FORM_ENDPOINT, {
+      const res = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(data)
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
       });
       if (!res.ok) throw new Error('Request failed with status ' + res.status);
-      showStatus("Thank you! We'll be in touch within one business day.", 'success');
+      showStatus("Thank you — we'll get back to you within one business day.", 'success');
       form.reset();
     } catch (err) {
       showStatus('Something went wrong sending your request. Please try again, or email hello@flowsent.ai directly.', 'error');
