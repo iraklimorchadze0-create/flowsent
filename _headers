@@ -1,0 +1,11 @@
+# Netlify security headers (applied at the edge to all routes).
+# Note: Netlify already sends Strict-Transport-Security on custom HTTPS domains.
+# If you set FORM_ENDPOINT in script.js (e.g. Formspree), add that origin to
+# connect-src, e.g.:  connect-src 'self' https://formspree.io;
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw='; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
