@@ -10,8 +10,8 @@
   --border: rgba(255, 255, 255, 0.06);
   --border-glow: rgba(99, 102, 241, 0.3);
   --text: #e4e4e7;
-  --text-dim: #71717a;
-  --text-muted: #52525b;
+  --text-dim: #8f8f9a;   /* ≥4.5:1 on --bg (WCAG AA body text) */
+  --text-muted: #7f7f8a; /* ≥4.5:1 on --bg (used on small text) */
   --accent: #818cf8;
   --accent-bright: #a5b4fc;
   --accent-cyan: #22d3ee;
@@ -51,6 +51,37 @@ ul { list-style: none; }
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 2000;
+  padding: 10px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border-glow);
+  border-radius: 50px;
+  color: var(--text);
+  font-size: 0.9rem;
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 /* ============================================
@@ -162,12 +193,16 @@ ul { list-style: none; }
 
 .nav__hamburger {
   display: none;
+  width: 44px;
+  height: 44px;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  margin-right: -10px;
 }
 
 .nav__hamburger span {
@@ -176,13 +211,17 @@ ul { list-style: none; }
   height: 2px;
   background: var(--text);
   border-radius: 2px;
-  transition: var(--transition);
+  transition: transform var(--transition), opacity var(--transition);
 }
+
+.nav__hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__hamburger.active span:nth-child(2) { opacity: 0; }
+.nav__hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .mobile-menu {
   display: none;
-  position: fixed;
-  top: 70px;
+  position: absolute;
+  top: 100%;
   left: 0;
   right: 0;
   background: rgba(5, 5, 8, 0.95);
@@ -260,6 +299,12 @@ ul { list-style: none; }
 
 .btn--full { width: 100%; justify-content: center; }
 
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
 .btn__arrow {
   transition: transform var(--transition);
 }
@@ -277,6 +322,7 @@ ul { list-style: none; }
 
 .hero {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -647,64 +693,6 @@ ul { list-style: none; }
 }
 
 /* ============================================
-   Process / How it Works
-   ============================================ */
-
-.process {
-  padding: 120px 0;
-  position: relative;
-  z-index: 1;
-}
-
-.process__steps {
-  max-width: 700px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.step {
-  display: flex;
-  gap: 32px;
-  padding: 36px 0;
-  border-bottom: 1px solid var(--border);
-  align-items: flex-start;
-  transition: all var(--transition);
-}
-
-.step:first-child { border-top: 1px solid var(--border); }
-
-.step:hover {
-  padding-left: 12px;
-}
-
-.step__number {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: rgba(129, 140, 248, 0.15);
-  line-height: 1;
-  min-width: 60px;
-  transition: color var(--transition);
-}
-
-.step:hover .step__number { color: var(--accent); }
-
-.step__content h3 {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.step__content p {
-  font-size: 0.95rem;
-  color: var(--text-dim);
-  line-height: 1.6;
-}
-
-/* ============================================
    Book a Call Section
    ============================================ */
 
@@ -771,6 +759,29 @@ ul { list-style: none; }
   flex-direction: column;
   gap: 16px;
 }
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+
+.form-group .req {
+  color: var(--accent-cyan);
+}
+
+.form-status {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  min-height: 1.5em;
+  margin-top: -4px;
+}
+
+.form-status--success { color: var(--accent-cyan); }
+.form-status--error { color: #f87171; }
 
 .form-group input,
 .form-group select,
@@ -887,17 +898,22 @@ ul { list-style: none; }
    ============================================ */
 
 .fade-up {
-  opacity: 0;
-  transform: translateY(40px);
   transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hidden-until-scroll only applies when JS is running (html.js set in <head>),
+   so content stays visible if scripts fail or are blocked */
+.js .fade-up {
+  opacity: 0;
+  transform: translateY(40px);
 }
 
 .fade-up--delay {
   transition-delay: 0.2s;
 }
 
-.fade-up.visible {
+.js .fade-up.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -934,7 +950,8 @@ ul { list-style: none; }
 }
 
 .fade-up.visible .section-title::after,
-.section-header.visible .section-title::after {
+.section-header.visible .section-title::after,
+html:not(.js) .section-header .section-title::after {
   transform: translateX(-50%) scaleX(1);
 }
 
@@ -1017,8 +1034,8 @@ ul { list-style: none; }
   }
 }
 
-/* Trust items stagger */
-.trust-item {
+/* Trust items stagger (hidden state gated on .js so they show without scripts) */
+.js .trust-item {
   opacity: 0;
   transform: translateX(-10px);
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -1087,5 +1104,31 @@ ul { list-style: none; }
   .footer__top {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .fade-up,
+  .js .trust-item {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
