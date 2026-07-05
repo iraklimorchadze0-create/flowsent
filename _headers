@@ -1,7 +1,8 @@
 # Netlify security headers (applied at the edge to all routes).
 # Note: Netlify already sends Strict-Transport-Security on custom HTTPS domains.
-# If you set FORM_ENDPOINT in script.js (e.g. Formspree), add that origin to
-# connect-src, e.g.:  connect-src 'self' https://formspree.io;
+# The booking form posts to Netlify Forms on this same origin, so
+# connect-src 'self' is sufficient. If you ever switch to a third-party
+# form endpoint, add its origin to connect-src.
 
 /*
   X-Frame-Options: DENY
