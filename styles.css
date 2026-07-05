@@ -311,12 +311,6 @@ summary:focus-visible {
   gap: 14px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.hero__note {
-  font-size: 0.9rem;
-  color: var(--muted);
 }
 
 /* ============================================
