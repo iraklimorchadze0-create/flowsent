@@ -1,12 +1,13 @@
 # Netlify security headers (applied at the edge to all routes).
 # Note: Netlify already sends Strict-Transport-Security on custom HTTPS domains.
-# The booking form posts to Netlify Forms on this same origin, so
-# connect-src 'self' is sufficient. If you ever switch to a third-party
-# form endpoint, add its origin to connect-src.
+# Booking runs through the Calendly inline embed, a plain iframe to
+# calendly.com — hence frame-src https://calendly.com. Everything inside
+# the iframe (Calendly's scripts, styles, requests) is governed by
+# Calendly's own CSP, not this one.
 
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw='; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw='; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-src https://calendly.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests

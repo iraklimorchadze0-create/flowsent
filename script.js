@@ -59,36 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // (with a prefers-reduced-motion override) and fragment navigation moves
   // keyboard focus correctly — no JS needed.
 
-  // --- Form submission (Netlify Forms) ---
-  // The form posts to Netlify's built-in form handling on this same origin.
-  // Submissions appear in the Netlify dashboard under Forms → strategy-call.
-  const form = document.getElementById('bookForm');
-  const status = document.getElementById('formStatus');
-  const submitBtn = form.querySelector('button[type="submit"]');
-
-  const showStatus = (message, type) => {
-    status.textContent = message;
-    status.className = 'form-status form-status--' + type;
-  };
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    submitBtn.disabled = true;
-    showStatus('Sending…', 'success');
-
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form)).toString()
-      });
-      if (!res.ok) throw new Error('Request failed with status ' + res.status);
-      showStatus("Thank you — we'll get back to you within one business day.", 'success');
-      form.reset();
-    } catch (err) {
-      showStatus('Something went wrong sending your request. Please try again, or email hello@flowsent.ai directly.', 'error');
-    } finally {
-      submitBtn.disabled = false;
-    }
-  });
+  // Booking is handled by the Calendly inline embed (plain iframe in
+  // index.html) — no widget.js, so script-src stays hash-pinned.
 });
