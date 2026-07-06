@@ -572,63 +572,20 @@ summary:focus-visible {
   margin-top: 4px;
 }
 
-/* Form */
-.book__form {
+/* Calendly embed */
+.book__calendly {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
-.hp-field { display: none; }
-
-.form-group label {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 6px;
-}
-
-.form-group .req {
-  color: var(--accent);
-}
-
-.form-group input,
-.form-group textarea {
+.book__calendly iframe {
   width: 100%;
-  padding: 13px 16px;
-  font-family: var(--font);
-  font-size: 0.95rem;
-  color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--border);
+  min-width: 300px;
+  height: 700px;
+  border: 0;
   border-radius: var(--radius);
-  outline: none;
-  transition: border-color var(--transition), box-shadow var(--transition);
 }
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: #64748B;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
-}
-
-.form-group textarea { resize: vertical; min-height: 80px; }
-
-.form-status {
-  font-size: 0.92rem;
-  line-height: 1.5;
-  min-height: 1.5em;
-  margin-top: -4px;
-}
-
-.form-status--success { color: var(--success); }
-.form-status--error { color: var(--error); }
 
 .book__alt {
   font-size: 0.9rem;
