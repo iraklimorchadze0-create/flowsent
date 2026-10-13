@@ -4,17 +4,40 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- Scroll-triggered fade-in animations ---
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  // --- Example email: line each margin note up with the phrase it explains ---
+  const exhibit = document.getElementById('exhibit');
+  const notes = document.getElementById('notes');
+  const wideLayout = window.matchMedia('(min-width: 1081px)');
 
-  document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+  const placeNotes = () => {
+    let floor = 0;
+    notes.querySelectorAll('.note').forEach((note) => {
+      if (!wideLayout.matches) {
+        note.style.top = '';
+        return;
+      }
+      const mark = exhibit.querySelector(`.mark[data-note="${note.dataset.for}"]`);
+      const top = mark.getBoundingClientRect().top - notes.getBoundingClientRect().top;
+      // Never let a note overlap the one above it
+      const placed = Math.max(floor, top - 2);
+      note.style.top = `${placed}px`;
+      floor = placed + note.offsetHeight + 16;
+    });
+  };
+
+  placeNotes();
+  window.addEventListener('resize', placeNotes);
+  document.fonts.ready.then(placeNotes);
+
+  // The page's one reveal: draw the research marks once the email is in view
+  const reveal = new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+      exhibit.classList.add('is-drawn');
+      reveal.disconnect();
+    }
+  }, { threshold: 0.35 });
+
+  reveal.observe(exhibit);
 
   // --- Navbar scroll effect ---
   const nav = document.getElementById('nav');
