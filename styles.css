@@ -1,7 +1,7 @@
 /* ============================================
    flowsent.ai — Midnight & gold
-   Founder-led: the photo and the annotated email
-   are the two things that carry the page.
+   One page in the order a prospect decides:
+   promise, video, booking, the founder, answers.
    ============================================ */
 
 :root {
@@ -14,10 +14,6 @@
   --haze: #A9B2CC;           /* body copy — 8.4:1 on --night */
   --dim: #8790AD;            /* captions — 5.6:1 on --night */
   --line: rgba(244, 239, 230, 0.12);
-  --paper: #FBF8F2;          /* the email sheet */
-  --ink: #1A1F33;            /* text on paper */
-  --ink-soft: #5E6378;       /* 5.9:1 on --paper */
-  --pencil: #A8741F;         /* research marks on paper — 4.6:1 on --paper */
   --display: 'Bricolage Grotesque', 'Segoe UI', sans-serif;
   --body: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --transition: 0.2s ease;
@@ -249,23 +245,11 @@ summary:focus-visible {
 }
 
 /* ============================================
-   Hero
+   Hero: headline, subheadline, then the video
    ============================================ */
 
 .hero {
-  padding-top: 112px;
-}
-
-.hero__inner {
-  display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: 72px;
-  align-items: end;
-}
-
-.hero__text {
-  align-self: center;
-  padding: 48px 0 120px;
+  padding: 144px 0 112px;
 }
 
 .hero__title {
@@ -275,36 +259,157 @@ summary:focus-visible {
   line-height: 0.98;
   letter-spacing: -0.045em;
   color: var(--cream);
-  margin-bottom: 36px;
+  max-width: 13em;
+  margin-bottom: 28px;
   text-wrap: balance;
 }
 
-.hero__letter {
-  max-width: 34em;
-  font-size: 1.2rem;
-  line-height: 1.7;
-  margin-bottom: 40px;
+.hero__sub {
+  max-width: 36em;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 48px;
 }
 
-.hero__letter strong {
-  color: var(--cream);
-  font-weight: 500;
+/* The video frame. Until the recording exists it holds a short note;
+   the host's iframe replaces .vsl__pending and fills the frame. */
+.vsl {
+  border-radius: 16px;
+  background: var(--night-2);
+  box-shadow:
+    0 0 0 1px rgba(237, 185, 94, 0.32),
+    0 40px 80px -40px rgba(0, 0, 0, 0.8);
 }
 
-.hero__cta {
+.vsl iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: inherit;
+}
+
+/* No fixed height, so on a phone the frame grows to fit the note */
+.vsl__pending {
+  aspect-ratio: 16 / 9;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
+  justify-content: center;
+  padding: 48px 32px;
+  text-align: center;
 }
 
-.hero__risk {
-  max-width: 22em;
-  font-size: 0.95rem;
-  color: var(--dim);
+.vsl__pending img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  margin-bottom: 24px;
 }
 
-/* The photo stands on the line where the next section begins */
+.vsl__title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+
+.vsl__pending p:last-child { max-width: 32em; }
+
+.vsl__guarantee {
+  margin-top: 24px;
+  padding-left: 16px;
+  border-left: 2px solid var(--gold);
+  font-size: 1.05rem;
+  color: var(--cream);
+}
+
+/* ============================================
+   Book a call
+   ============================================ */
+
+.book__head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: end;
+  margin-bottom: 48px;
+}
+
+.book__head .section-title { margin-bottom: 0; }
+
+.book__head p {
+  max-width: 30em;
+  font-size: 1.15rem;
+}
+
+.book__calendly {
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--night-2);
+}
+
+.book__calendly iframe {
+  display: block;
+  width: 100%;
+  min-width: 300px;
+  height: 720px;
+  border: 0;
+}
+
+.book__note {
+  margin-top: 20px;
+  color: var(--haze);
+}
+
+.book__note a,
+.about__contact a,
+.faq__intro a {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.book__note a:hover,
+.about__contact a:hover,
+.faq__intro a:hover { text-decoration: underline; }
+
+/* ============================================
+   About the founder: the photo stands on the
+   line where the FAQ begins
+   ============================================ */
+
+.about { padding-bottom: 0; }
+
+.about__inner {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 72px;
+  align-items: end;
+}
+
+.about__text {
+  align-self: center;
+  padding-bottom: 128px;
+}
+
+.about__text .section-title { margin-bottom: 32px; }
+
+.about__text > p {
+  max-width: 34em;
+  font-size: 1.15rem;
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.about__text > p.about__contact {
+  margin: 32px 0 0;
+  font-size: 1.05rem;
+}
+
 .portrait {
   position: relative;
 }
@@ -321,7 +426,6 @@ summary:focus-visible {
   position: absolute;
   left: -48px;
   bottom: 64px;
-  max-width: 250px;
   padding: 14px 18px;
   border-radius: 10px;
   background: var(--cream);
@@ -340,303 +444,6 @@ summary:focus-visible {
 }
 
 /* ============================================
-   Problem
-   ============================================ */
-
-.statement {
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: clamp(2rem, 4vw, 3.4rem);
-  line-height: 1.08;
-  letter-spacing: -0.035em;
-  color: var(--cream);
-  max-width: 16em;
-  margin-bottom: 36px;
-  text-wrap: balance;
-}
-
-.lead {
-  max-width: 38em;
-  margin-left: auto;
-  font-size: 1.2rem;
-  line-height: 1.75;
-}
-
-/* ============================================
-   How it works: the steps are a real sequence
-   ============================================ */
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.step {
-  position: relative;
-  padding: 0 28px 0 0;
-  border-top: 1px solid var(--line);
-}
-
-/* Gold marker sitting on the timeline */
-.step::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: 0;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--gold);
-}
-
-.step__number {
-  display: block;
-  margin: 28px 0 14px;
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 1;
-  color: var(--gold);
-}
-
-.step__title {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1.2rem;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
-  color: var(--cream);
-  margin-bottom: 12px;
-}
-
-.step p { font-size: 1rem; }
-
-/* The annotated example email */
-.exhibit-intro {
-  max-width: 36em;
-  margin: 120px 0 48px;
-}
-
-.exhibit-intro__title {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  color: var(--cream);
-  margin-bottom: 14px;
-}
-
-.exhibit {
-  display: grid;
-  grid-template-columns: minmax(0, 640px) 260px;
-  gap: 40px;
-}
-
-.mail {
-  background: var(--paper);
-  color: var(--ink);
-  border-radius: 6px;
-  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
-}
-
-.mail__head {
-  display: grid;
-  grid-template-columns: 72px 1fr;
-  row-gap: 6px;
-  padding: 20px 32px;
-  border-bottom: 1px solid #E6E0D4;
-  font-size: 0.93rem;
-}
-
-.mail__head dt { color: var(--ink-soft); }
-
-.mail__body {
-  padding: 30px 32px 36px;
-  font-size: 1.12rem;
-  line-height: 1.65;
-}
-
-.mail__body p + p { margin-top: 16px; }
-
-.mark {
-  background-image: linear-gradient(var(--pencil), var(--pencil));
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 100% 2px;
-  padding-bottom: 1px;
-}
-
-.mark sup {
-  margin-left: 2px;
-  font-size: 0.62rem;
-  font-weight: 600;
-  color: var(--pencil);
-}
-
-.notes { position: relative; }
-
-.note {
-  position: absolute;
-  left: 0;
-  right: 0;
-  padding-left: 24px;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 1.02rem;
-  line-height: 1.45;
-  color: var(--gold);
-}
-
-.note__n {
-  position: absolute;
-  left: 0;
-  top: 1px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 0.75rem;
-}
-
-.exhibit__caption {
-  grid-column: 1 / -1;
-  font-size: 0.9rem;
-  color: var(--dim);
-}
-
-/* The page's one orchestrated moment: the research marks draw in,
-   then their notes appear, once the email scrolls into view */
-@media (prefers-reduced-motion: no-preference) {
-  .js .mark { background-size: 0% 2px; transition: background-size 0.5s ease-out; }
-  .js .note { opacity: 0; transform: translateX(-6px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
-  .js .is-drawn .mark { background-size: 100% 2px; }
-  .js .is-drawn .note { opacity: 1; transform: none; }
-  .js .is-drawn .mark[data-note="2"],
-  .js .is-drawn .note:nth-child(2) { transition-delay: 0.35s; }
-  .js .is-drawn .mark[data-note="3"],
-  .js .is-drawn .note:nth-child(3) { transition-delay: 0.7s; }
-}
-
-/* ============================================
-   What's included
-   ============================================ */
-
-.features {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0 48px;
-}
-
-.features li {
-  padding: 26px 0 28px;
-  border-top: 1px solid var(--line);
-}
-
-.features h3 {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1.12rem;
-  letter-spacing: -0.01em;
-  color: var(--cream);
-  margin-bottom: 6px;
-}
-
-.features p { font-size: 1rem; }
-
-/* ============================================
-   Comparison
-   ============================================ */
-
-.compare__table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 1rem;
-  line-height: 1.55;
-}
-
-.compare__table th,
-.compare__table td {
-  padding: 22px 24px;
-  text-align: left;
-  vertical-align: top;
-  border-bottom: 1px solid var(--line);
-}
-
-.compare__table thead th {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--cream);
-}
-
-.compare__table tbody th {
-  width: 22%;
-  padding-left: 0;
-  font-weight: 600;
-  color: var(--cream);
-}
-
-.compare__table thead th:first-child { padding-left: 0; }
-
-.compare__table td { color: var(--haze); }
-
-.compare__table .compare__us {
-  background: var(--night-2);
-  color: var(--cream);
-}
-
-.compare__table thead .compare__us {
-  color: var(--gold);
-  border-radius: 10px 10px 0 0;
-}
-
-.compare__table tbody tr:last-child td.compare__us { border-radius: 0 0 10px 10px; }
-.compare__table tbody tr:last-child th,
-.compare__table tbody tr:last-child td { border-bottom: none; }
-
-/* ============================================
-   Founder note
-   ============================================ */
-
-.founder__letter {
-  max-width: 44em;
-  margin: 0 auto;
-  padding: 64px 72px;
-  border-radius: 16px;
-  background: var(--night-2);
-}
-
-.founder__letter .section-title { margin-bottom: 28px; }
-
-.founder__letter > p {
-  font-size: 1.15rem;
-  line-height: 1.75;
-  margin-bottom: 18px;
-}
-
-.founder__sign {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 32px;
-}
-
-.founder__sign img {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-}
-
-.founder__sign p { font-size: 0.95rem; }
-
-.founder__sign b {
-  display: block;
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--cream);
-}
-
-/* ============================================
    FAQ
    ============================================ */
 
@@ -647,6 +454,8 @@ summary:focus-visible {
   align-items: start;
 }
 
+.faq__intro .section-title { margin-bottom: 24px; }
+
 .faq__item { border-bottom: 1px solid var(--line); }
 .faq__item:first-child { border-top: 1px solid var(--line); }
 
@@ -656,11 +465,16 @@ summary:focus-visible {
   justify-content: space-between;
   gap: 16px;
   padding: 22px 0;
-  font-size: 1.1rem;
-  font-weight: 500;
   color: var(--cream);
   cursor: pointer;
   list-style: none;
+}
+
+.faq__item summary h3 {
+  font-family: var(--body);
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 .faq__item summary::-webkit-details-marker { display: none; }
@@ -681,48 +495,6 @@ summary:focus-visible {
 .faq__item p {
   max-width: 38em;
   padding-bottom: 24px;
-}
-
-/* ============================================
-   Book a call
-   ============================================ */
-
-.book__wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 72px;
-  align-items: start;
-}
-
-.book__info .section-title { margin-bottom: 24px; }
-
-.book__risk {
-  font-size: 1.15rem;
-  color: var(--cream);
-  margin-bottom: 20px;
-}
-
-.book__note { color: var(--haze); }
-
-.book__note a {
-  color: var(--gold);
-  font-weight: 600;
-}
-
-.book__note a:hover { text-decoration: underline; }
-
-.book__calendly {
-  border-radius: 16px;
-  overflow: hidden;
-  background: var(--night-2);
-}
-
-.book__calendly iframe {
-  display: block;
-  width: 100%;
-  min-width: 300px;
-  height: 700px;
-  border: 0;
 }
 
 /* ============================================
@@ -768,21 +540,14 @@ summary:focus-visible {
    Responsive
    ============================================ */
 
-@media (max-width: 1080px) {
-  .steps { grid-template-columns: repeat(2, 1fr); row-gap: 48px; }
-  .exhibit { grid-template-columns: 1fr; }
-  .note { position: relative; top: auto; margin-top: 12px; }
-  .features { grid-template-columns: repeat(2, 1fr); }
-}
-
 @media (max-width: 900px) {
-  .hero__inner { grid-template-columns: 1fr; gap: 24px; }
-  .hero__text { padding: 40px 0 0; }
+  .book__head,
+  .about__inner,
+  .faq__inner { grid-template-columns: 1fr; gap: 32px; }
+
+  .about__text { padding-bottom: 0; }
   .portrait { max-width: 420px; }
   .portrait figcaption { left: 16px; }
-
-  .faq__inner,
-  .book__wrapper { grid-template-columns: 1fr; gap: 32px; }
 }
 
 @media (max-width: 768px) {
@@ -795,73 +560,22 @@ summary:focus-visible {
   .section { padding: 88px 0; }
   .section-title { margin-bottom: 40px; }
 
-  .hero { padding-top: 88px; }
-  .hero__letter,
-  .lead { font-size: 1.1rem; }
-  .lead { margin-left: 0; }
+  .hero { padding: 120px 0 88px; }
+  .hero__sub { font-size: 1.1rem; margin-bottom: 40px; }
 
-  .exhibit-intro { margin-top: 88px; }
-  .mail__head,
-  .mail__body { padding-left: 20px; padding-right: 20px; }
-  .mail__head { grid-template-columns: 64px 1fr; }
+  .vsl { border-radius: 12px; }
+  .vsl__pending { padding: 32px 20px; }
+  .vsl__pending img { width: 56px; height: 56px; margin-bottom: 16px; }
 
-  .founder__letter { padding: 40px 24px; }
+  .book__head { margin-bottom: 32px; }
+  .book__calendly iframe { height: 1040px; }
 
-  /* Comparison table becomes one block per question */
-  .compare__table thead { display: none; }
-
-  .compare__table,
-  .compare__table tbody,
-  .compare__table tr,
-  .compare__table th,
-  .compare__table td {
-    display: block;
-    width: 100%;
-  }
-
-  .compare__table tr {
-    margin-bottom: 32px;
-    border-top: 1px solid var(--line);
-  }
-
-  .compare__table tbody th {
-    width: 100%;
-    padding: 18px 0 10px;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 1.1rem;
-    border-bottom: none;
-  }
-
-  .compare__table td {
-    padding: 10px 0;
-    border-bottom: none;
-  }
-
-  .compare__table td.compare__us,
-  .compare__table tbody tr:last-child td.compare__us {
-    padding: 14px 16px;
-    margin-top: 6px;
-    border-radius: 10px;
-  }
-
-  .compare__table td::before {
-    content: attr(data-label);
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--dim);
-  }
-
-  .compare__table td.compare__us::before { color: var(--gold); }
+  .about { padding-bottom: 0; }
+  .about__text > p { font-size: 1.1rem; }
 }
 
 @media (max-width: 640px) {
-  .steps,
-  .features { grid-template-columns: 1fr; }
-
   .hero__title { font-size: 2.4rem; }
-  .hero__cta .btn { width: 100%; }
 
   .footer__inner {
     flex-direction: column;

@@ -1,0 +1,21 @@
+# Flowsent
+
+> Flowsent is a done-for-you cold email service for B2B SaaS companies, founded and run by Irakli Morchadze. It finds the companies that match a client's ideal customer, researches each person, writes to them one by one, answers the replies and books interested buyers onto the client's calendar. The promise is 15 booked sales calls in the first 30 days live. If there are fewer than 15 by day 30, Flowsent keeps working at no extra cost until there are.
+
+## Key facts
+
+- Who it's for: B2B companies where one new client is worth thousands and deals start with a conversation, starting with B2B SaaS. Not a fit for companies that sell to consumers or haven't sold their offer yet.
+- Timeline: two weeks of setup and inbox warm-up, then a 30-day clock that starts on launch day.
+- What counts as a booked call: a decision maker at a company that matches the ideal customer agreed with the client, booked on the client's calendar.
+- How it works: the ICP Engine researches and scores every prospect, the Personalization Engine writes each one a personal email, and the Custom Response System answers interested replies within minutes and books the call.
+- Domain safety: emails go out from separate domains that Flowsent buys, warms up and monitors. The client's main domain never sends a cold email.
+- What the client does: about 30 minutes for an intake form, one strategy session, and a quick approval of the messaging before launch. Then they take the calls.
+- Pricing: depends on the market and how many people need to be reached. It's worked out on the first call, and exact pricing follows on a short second call.
+- Founder: Irakli Morchadze built automation systems for client businesses before starting Flowsent. Clients work with him directly.
+
+## Links
+
+- [Flowsent home page](https://flowsent.ai/): the offer, the walkthrough video, booking, the founder and the FAQ
+- [Book a strategy call](https://flowsent.ai/#book): 45 minutes with Irakli on a video call
+- [FAQ](https://flowsent.ai/#faq): answers about results, the guarantee, domain safety, SDRs and pricing
+- Email: hello@flowsent.ai
