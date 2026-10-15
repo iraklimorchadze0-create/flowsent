@@ -1,0 +1,5 @@
+# Search engines and AI answer engines are welcome to read the whole site.
+User-agent: *
+Allow: /
+
+Sitemap: https://flowsent.ai/sitemap.xml
