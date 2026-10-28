@@ -4,10 +4,19 @@
 # calendly.com — hence frame-src https://calendly.com. Everything inside
 # the iframe (Calendly's scripts, styles, requests) is governed by
 # Calendly's own CSP, not this one.
+# Videos are Wistia iframe embeds (fast.wistia.net/embed/iframe/<id>), so
+# Wistia needs only frame-src too. A Wistia script embed would need more.
 
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-src https://calendly.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-src https://calendly.com https://fast.wistia.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
+# The pre-call page is only for people who booked; keep it out of search results.
+/pre-call
+  X-Robots-Tag: noindex, nofollow
+
+/pre-call/*
+  X-Robots-Tag: noindex, nofollow
