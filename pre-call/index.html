@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your call isn't confirmed yet | Flowsent</title>
+  <meta name="description" content="Confirm your strategy call with Flowsent, then watch the system walkthrough and the quick answers before we talk.">
+  <!-- Hidden page: Calendly redirects here after a booking, and it's sent to people booked by hand. Not linked from the site, not in the sitemap. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0E1631">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Navigation: no booking button, they've already booked -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo">Flowsent</a>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- Headline: the one thing to do right now -->
+  <section class="hero precall-hero">
+    <div class="container">
+      <h1 class="hero__title">Your call isn't confirmed yet.</h1>
+      <p class="hero__sub">Accepting the calendar invite locks in your time slot. Then, before we talk, everything you'd want to know about how this works is on this page.</p>
+      <p class="precall-booked" id="bookedTime" hidden></p>
+    </div>
+  </section>
+
+  <!-- The steps, in the order the welcome video names them -->
+  <section class="precall-steps">
+    <div class="container">
+      <ol class="steps">
+
+        <li class="step" id="welcome">
+          <span class="step__num" aria-hidden="true">1</span>
+          <div>
+            <h2 class="step__title">Watch this first</h2>
+            <p class="step__lede">A short video from me on what happens between now and our call.</p>
+            <div class="vsl">
+              <div class="vsl__pending">
+                <img src="/irakli-face.jpg" width="160" height="160" alt="">
+                <p class="vsl__title">This video is being recorded.</p>
+                <p>The short version: accept the calendar invite below, then look through the walkthrough and the quick answers before we talk.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="step" id="confirm">
+          <span class="step__num" aria-hidden="true">2</span>
+          <div>
+            <h2 class="step__title">Accept the calendar invite</h2>
+            <p class="step__lede">It takes ten seconds, and it keeps your time slot from being double-booked.</p>
+            <div class="invite">
+              <div class="invite__card" role="img" aria-label="A calendar invite for the strategy call, with the Yes button highlighted">
+                <p class="invite__subject">Invitation: Strategy Call with Irakli Morchadze</p>
+                <p class="invite__meta" data-booked-time>The time you booked</p>
+                <p class="invite__meta">Google Meet video call</p>
+                <div class="invite__rsvp">
+                  <span>Going?</span>
+                  <span class="invite__choice invite__choice--yes">Yes</span>
+                  <span class="invite__choice">No</span>
+                  <span class="invite__choice">Maybe</span>
+                </div>
+              </div>
+              <ul class="invite__how">
+                <li><b>Find the invite.</b> It's in your inbox. If it isn't there, check spam or Promotions.</li>
+                <li><b>Click Yes.</b> In Outlook, the button says Accept.</li>
+                <li><b>That's it.</b> The Google Meet link for our call is in the same invite.</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+
+        <li class="step" id="walkthrough">
+          <span class="step__num" aria-hidden="true">3</span>
+          <div>
+            <h2 class="step__title">Watch the system walkthrough</h2>
+            <p class="step__lede">About 12 minutes on how we get companies 15 booked sales calls in their first 30 days live: who we target, how every email gets written, and how replies turn into calls on your calendar.</p>
+            <div class="vsl">
+              <div class="vsl__pending">
+                <img src="/irakli-face.jpg" width="160" height="160" alt="">
+                <p class="vsl__title">The walkthrough is being recorded.</p>
+                <p>Until it's up, bring your questions to the call and I'll walk you through the system myself.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="step" id="answers">
+          <span class="step__num" aria-hidden="true">4</span>
+          <div>
+            <h2 class="step__title">Get quick answers</h2>
+            <p class="step__lede">The six questions people ask most before a call like this, about a minute each. Watch the ones that matter to you.</p>
+            <div class="answers">
+              <div class="vsl answers__player" aria-live="polite">
+                <div class="vsl__pending">
+                  <p class="vsl__title">What makes you different from other lead gen agencies?</p>
+                  <p>This answer is being recorded.</p>
+                </div>
+              </div>
+              <!-- Keep this order: the walkthrough's last slide lists the questions the same way -->
+              <ol class="answers__list">
+                <li><button class="answers__item" type="button" aria-current="true" data-video=""><span class="answers__n">1</span><span class="answers__q">What makes you different from other lead gen agencies?</span></button></li>
+                <li><button class="answers__item" type="button" data-video=""><span class="answers__n">2</span><span class="answers__q">What results can we expect, and how fast?</span></button></li>
+                <li><button class="answers__item" type="button" data-video=""><span class="answers__n">3</span><span class="answers__q">Will this hurt our domain or land us in spam?</span></button></li>
+                <li><button class="answers__item" type="button" data-video=""><span class="answers__n">4</span><span class="answers__q">How much of our team's time does this take?</span></button></li>
+                <li><button class="answers__item" type="button" data-video=""><span class="answers__n">5</span><span class="answers__q">We've been burned by an agency before. Why is this different?</span></button></li>
+                <li><button class="answers__item" type="button" data-video=""><span class="answers__n">6</span><span class="answers__q">Our buyers already get dozens of cold emails. Does this still work?</span></button></li>
+              </ol>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <section class="section precall-end">
+    <div class="container precall-end__inner">
+      <img src="/irakli-face.jpg" width="160" height="160" alt="Irakli Morchadze">
+      <div>
+        <h2 class="section-title">See you on the call.</h2>
+        <p>Need a different time? Use the reschedule link in your booking confirmation email, or write to me at <a href="mailto:hello@flowsent.ai">hello@flowsent.ai</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="/" class="nav__logo">Flowsent</a>
+        <a class="footer__email" href="mailto:hello@flowsent.ai">hello@flowsent.ai</a>
+      </div>
+      <nav class="footer__links" aria-label="Legal">
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </nav>
+      <p class="footer__copy">&copy; 2026 Flowsent. All rights reserved.</p>
+    </div>
+    <div class="container">
+      <p class="footer__legal">Results vary. No earnings or performance claims are guaranteed unless explicitly stated in your agreement.</p>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>
