@@ -644,47 +644,11 @@ summary:focus-visible {
   color: var(--cream);
 }
 
-/* Step 4: one player, six questions to pick from */
-.answers {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 40px;
-  align-items: start;
-}
-
-.answers__player .vsl__pending { padding: 40px 32px; }
-
-.answers__item {
-  display: flex;
-  gap: 16px;
-  width: 100%;
-  padding: 16px 0;
-  background: none;
-  border: 0;
-  border-bottom: 1px solid var(--line);
-  font: inherit;
-  font-size: 1.02rem;
-  line-height: 1.45;
-  text-align: left;
-  color: var(--haze);
-  cursor: pointer;
-  transition: color var(--transition);
-}
-
-.answers__list li:first-child .answers__item { border-top: 1px solid var(--line); }
-
-.answers__item:hover,
-.answers__item[aria-current="true"] { color: var(--cream); }
-
-.answers__n {
-  flex-shrink: 0;
-  min-width: 1.1em;
-  font-family: var(--display);
-  font-weight: 700;
-  color: var(--dim);
-}
-
-.answers__item[aria-current="true"] .answers__n { color: var(--gold); }
+/* Step 4: written answers in the FAQ's open-and-close rows; a video, when it exists,
+   sits above the text inside its answer */
+.answers .faq__item p { padding-bottom: 16px; }
+.answers .faq__item p:last-child { padding-bottom: 28px; }
+.answers .faq__item .vsl { margin-bottom: 20px; }
 
 .precall-end__inner {
   display: flex;
@@ -834,8 +798,7 @@ summary:focus-visible {
   .portrait { max-width: 420px; }
   .portrait figcaption { left: 16px; }
 
-  .invite,
-  .answers { grid-template-columns: 1fr; gap: 32px; }
+  .invite { grid-template-columns: 1fr; gap: 32px; }
 }
 
 @media (max-width: 768px) {
@@ -869,7 +832,6 @@ summary:focus-visible {
   .step__num { width: 44px; height: 44px; font-size: 1.1rem; margin-bottom: 8px; }
   .step__lede { font-size: 1.05rem; margin-bottom: 28px; }
   .invite__card { padding: 22px 20px 20px; }
-  .answers__player .vsl__pending { padding: 28px 20px; }
   .precall-end__inner { flex-direction: column; align-items: flex-start; gap: 20px; }
   .precall-end__inner img { width: 72px; height: 72px; }
 

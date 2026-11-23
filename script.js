@@ -62,39 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- Pre-call page: one player for the six quick answers ---
-  // Each question button carries its video's embed URL in data-video. Until a video
-  // exists the attribute is empty and the player shows the "being recorded" note.
-  const answers = document.querySelector('.answers');
-  if (answers) {
-    const player = answers.querySelector('.answers__player');
-    const items = answers.querySelectorAll('.answers__item');
-    const pending = player.innerHTML;
-
-    const show = (item) => {
-      items.forEach((i) => {
-        if (i === item) i.setAttribute('aria-current', 'true');
-        else i.removeAttribute('aria-current');
-      });
-      const question = item.querySelector('.answers__q').textContent;
-      if (item.dataset.video) {
-        const frame = document.createElement('iframe');
-        frame.src = item.dataset.video;
-        frame.title = question;
-        frame.allow = 'autoplay; fullscreen';
-        frame.allowFullscreen = true;
-        player.replaceChildren(frame);
-      } else {
-        player.innerHTML = pending;
-        player.querySelector('.vsl__title').textContent = question;
-      }
-      // On a phone the list sits below the player, so bring the player back into view
-      if (player.getBoundingClientRect().top < 0) player.scrollIntoView();
-    };
-
-    items.forEach((item) => item.addEventListener('click', () => show(item)));
-  }
-
   // In-page anchor scrolling is native: CSS scroll-behavior handles smoothness
   // (with a prefers-reduced-motion override) and fragment navigation moves
   // keyboard focus correctly — no JS needed.
