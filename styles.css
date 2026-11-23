@@ -290,6 +290,9 @@ summary:focus-visible {
   border-radius: inherit;
 }
 
+/* The welcome video is filmed 4:3, not 16:9 */
+.vsl--4x3 iframe { aspect-ratio: 4 / 3; }
+
 /* No fixed height, so on a phone the frame grows to fit the note */
 .vsl__pending {
   aspect-ratio: 16 / 9;
